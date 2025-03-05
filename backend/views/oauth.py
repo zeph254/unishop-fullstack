@@ -8,6 +8,7 @@ import cloudinary.uploader
 oauth_bp = Blueprint('oauth_bp', __name__, url_prefix='/auth')
 
 # Google OAuth2 configuration
+GOOGLE_CLIENT_ID = os.getenv('GOOGLE_CLIENT_ID', '587185143160-oc5gioqh3cr6nbntie6nv25tfg0ki2nt.apps.googleusercontent.com')
 
 GOOGLE_REDIRECT_URI = 'http://localhost:5000/auth/google/callback'
 GOOGLE_AUTHORIZATION_BASE_URL = "https://accounts.google.com/o/oauth2/v2/auth"

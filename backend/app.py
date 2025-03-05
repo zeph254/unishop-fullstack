@@ -37,7 +37,7 @@ def create_app():
     })
 
     # Configuration settings
-    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///shop.db"
+    app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://shopdb_475k_user:uYSh9kbllnuSOnx9vV3Kd8TdfBPwUnBT@dpg-cv4asbl2ng1s73b720i0-a.oregon-postgres.render.com/shopdb_475k"
     app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY', 'wouhsdjlahljxnlsqehouefhouuel')
     app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(hours=24)
     app.config['MAIL_SERVER'] = 'smtp.gmail.com'
