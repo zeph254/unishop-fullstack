@@ -13,7 +13,7 @@ const CustomerPurchaseTrends = () => {
   const fetchCustomerTrends = async () => {
     try {
       const token = safeStorageGet('token');
-      const response = await fetch('http://127.0.0.1:5000/analytics/customer_trends', {
+      const response = await fetch('https://unishop-fullstack.onrender.com/analytics/customer_trends', {
         headers: {
           Authorization: `Bearer ${token}`,
         },

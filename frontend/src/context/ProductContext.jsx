@@ -14,7 +14,7 @@ export const ProductProvider = ({ children }) => {
   // Fetch all products from the backend
   const fetchProducts = useCallback(async () => {
     try {
-      const response = await fetch('http://127.0.0.1:5000/products/');
+      const response = await fetch('https://unishop-fullstack.onrender.com/products/');
       if (!response.ok) {
         throw new Error('Failed to fetch products');
       }
@@ -65,7 +65,7 @@ export const ProductProvider = ({ children }) => {
   const addProduct = async (productData) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://127.0.0.1:5000/products/', {
+      const response = await fetch('https://unishop-fullstack.onrender.com/products/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -91,7 +91,7 @@ export const ProductProvider = ({ children }) => {
   const updateProduct = async (productId, updatedData) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://127.0.0.1:5000/products/${productId}`, {
+      const response = await fetch(`https://unishop-fullstack.onrender.com/products/${productId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -120,7 +120,7 @@ export const ProductProvider = ({ children }) => {
   const deleteProduct = async (productId) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://127.0.0.1:5000/products/${productId}`, {
+      const response = await fetch(`https://unishop-fullstack.onrender.com/products/${productId}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${token}`,

@@ -64,7 +64,7 @@ const Checkout = () => {
       }));
 
       // Step 2: Create an order
-      const orderResponse = await fetch('http://127.0.0.1:5000/create', {
+      const orderResponse = await fetch('https://unishop-fullstack.onrender.com/create', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

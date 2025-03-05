@@ -14,7 +14,7 @@ export default function Orders() {
   // Fetch order history from the backend
   const fetchOrderHistory = async () => {
     try {
-      const response = await axios.get("http://127.0.0.1:5000/history", {
+      const response = await axios.get("https://unishop-fullstack.onrender.com/history", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -39,7 +39,7 @@ export default function Orders() {
   // Track order status by order ID
   const trackOrderStatus = async (orderId) => {
     try {
-      const response = await axios.get(`http://127.0.0.1:5000/track/${orderId}`, {
+      const response = await axios.get(`https://unishop-fullstack.onrender.com/track/${orderId}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`, // Include JWT token
         },

@@ -29,7 +29,7 @@ export const CartProvider = ({ children }) => {
       }
 
       console.log('Fetching cart items...'); // Debug logging
-      const response = await axios.get('http://127.0.0.1:5000/cart', {
+      const response = await axios.get('https://unishop-fullstack.onrender.com/cart', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -59,7 +59,7 @@ export const CartProvider = ({ children }) => {
       }
 
       const response = await axios.post(
-        'http://127.0.0.1:5000/cart/add',
+        'https://unishop-fullstack.onrender.com/cart/add',
         { product_id: product.id, quantity },
         {
           headers: {
@@ -94,7 +94,7 @@ export const CartProvider = ({ children }) => {
       }
 
       console.log(`Removing product ${productId} from cart`); // Debug logging
-      await axios.delete(`http://127.0.0.1:5000/cart/remove/${productId}`, {
+      await axios.delete(`https://unishop-fullstack.onrender.com/cart/remove/${productId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -115,7 +115,7 @@ export const CartProvider = ({ children }) => {
       }
 
       await axios.put(
-        `http://127.0.0.1:5000/cart/update/${productId}`,
+        `https://unishop-fullstack.onrender.com/cart/update/${productId}`,
         { quantity },
         {
           headers: {
@@ -142,7 +142,7 @@ export const CartProvider = ({ children }) => {
         return;
       }
 
-      await axios.delete('http://127.0.0.1:5000/cart/clear', {
+      await axios.delete('https://unishop-fullstack.onrender.com/cart/clear', {
         headers: {
           Authorization: `Bearer ${token}`,
         },

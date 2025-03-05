@@ -18,7 +18,7 @@ const AdminDashboard = () => {
   const fetchUsers = async () => {
     try {
       const token = safeStorageGet('token');
-      const response = await fetch('http://127.0.0.1:5000/users/', {
+      const response = await fetch('https://unishop-fullstack.onrender.com/users/', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -38,7 +38,7 @@ const AdminDashboard = () => {
   const promoteUser = async (userId) => {
     try {
       const token = safeStorageGet('token');
-      const response = await fetch(`http://127.0.0.1:5000/users/${userId}/promote`, {
+      const response = await fetch(`https://unishop-fullstack.onrender.com/users/${userId}/promote`, {
         method: 'PUT',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -57,7 +57,7 @@ const AdminDashboard = () => {
   const deleteUser = async (userId) => {
     try {
       const token = safeStorageGet('token');
-      const response = await fetch(`http://127.0.0.1:5000/users/${userId}`, {
+      const response = await fetch(`https://unishop-fullstack.onrender.com/users/${userId}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -76,7 +76,7 @@ const AdminDashboard = () => {
   const fetchBestSellingProducts = async () => {
     try {
       const token = safeStorageGet('token');
-      const response = await fetch('http://127.0.0.1:5000/analytics/best_selling', {
+      const response = await fetch('https://unishop-fullstack.onrender.com/analytics/best_selling', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -97,7 +97,7 @@ const AdminDashboard = () => {
   const fetchRevenueAnalytics = async () => {
     try {
       const token = safeStorageGet('token');
-      const response = await fetch('http://127.0.0.1:5000/analytics/revenue', {
+      const response = await fetch('https://unishop-fullstack.onrender.com/analytics/revenue', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -122,7 +122,7 @@ const AdminDashboard = () => {
   const fetchCustomerTrends = async () => {
     try {
       const token = safeStorageGet('token');
-      const response = await fetch('http://127.0.0.1:5000/analytics/customer_trends', {
+      const response = await fetch('https://unishop-fullstack.onrender.com/analytics/customer_trends', {
         headers: {
           Authorization: `Bearer ${token}`,
         },

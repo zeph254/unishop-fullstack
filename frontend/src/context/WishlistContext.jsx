@@ -24,7 +24,7 @@ export const WishlistProvider = ({ children }) => {
         return;
       }
 
-      const response = await axios.get('http://127.0.0.1:5000/wishlist', {
+      const response = await axios.get('https://unishop-fullstack.onrender.com/wishlist', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -53,7 +53,7 @@ export const WishlistProvider = ({ children }) => {
   
       console.log('Payload:', { product_id: product.id }); // Debugging
       const response = await axios.post(
-        'http://127.0.0.1:5000/wishlist',
+        'https://unishop-fullstack.onrender.com/wishlist',
         { product_id: product.id },
         {
           headers: {
@@ -86,7 +86,7 @@ export const WishlistProvider = ({ children }) => {
   
     try {
       console.log('Wishlist Item ID:', wishlistItemId); // Debugging
-      const response = await axios.delete(`http://127.0.0.1:5000/wishlist/${wishlistItemId}`, {
+      const response = await axios.delete(`https://unishop-fullstack.onrender.com/wishlist/${wishlistItemId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

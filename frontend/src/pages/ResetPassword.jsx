@@ -12,7 +12,7 @@ const ResetPassword = () => {
     e.preventDefault();
     setIsLoading(true); // Start loading
     try {
-      const response = await fetch(`http://127.0.0.1:5000/auth/reset-password/${token}`, {
+      const response = await fetch(`https://unishop-fullstack.onrender.com/auth/reset-password/${token}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ password }),

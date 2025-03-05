@@ -13,7 +13,7 @@ const BestSellingProducts = () => {
   const fetchBestSellingProducts = async () => {
     try {
       const token = safeStorageGet('token');
-      const response = await fetch('http://127.0.0.1:5000/analytics/best_selling', {
+      const response = await fetch('https://unishop-fullstack.onrender.com/analytics/best_selling', {
         headers: {
           Authorization: `Bearer ${token}`,
         },

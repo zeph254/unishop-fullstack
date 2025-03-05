@@ -11,7 +11,7 @@ const ForgotPassword = () => {
     setMessage(""); // Clear previous messages
 
     try {
-      const response = await fetch("http://127.0.0.1:5000/auth/forgot-password", {
+      const response = await fetch("https://unishop-fullstack.onrender.com/auth/forgot-password", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),

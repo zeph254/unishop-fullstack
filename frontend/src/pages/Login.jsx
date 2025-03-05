@@ -54,7 +54,7 @@ export default function Login() {
   // Function to authenticate user via Google email
   // const loginWithGoogle = async (email) => {
   //   try {
-  //     const response = await fetch("http://127.0.0.1:5000/api/auth/google-login", {
+  //     const response = await fetch("https://unishop-fullstack.onrender.com/api/auth/google-login", {
   //       method: "POST",
   //       headers: { "Content-Type": "application/json" },
   //       body: JSON.stringify({ email }),
@@ -75,7 +75,7 @@ export default function Login() {
 
   // Handle GitHub login
   const handleGitHubLogin = () => {
-    window.location.href = "http://127.0.0.1:5000/api/auth/github";
+    window.location.href = "https://unishop-fullstack.onrender.com/api/auth/github";
   };
 
   return (

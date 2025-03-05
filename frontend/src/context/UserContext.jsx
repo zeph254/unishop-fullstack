@@ -55,7 +55,7 @@ export const UserProvider = ({ children }) => {
     }
   
     try {
-      const response = await fetch("http://127.0.0.1:5000/users", {
+      const response = await fetch("https://unishop-fullstack.onrender.com/users", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -93,7 +93,7 @@ export const UserProvider = ({ children }) => {
   // Login function
   const login = async (email, password) => {
     try {
-      const response = await fetch("http://127.0.0.1:5000/auth/login", {
+      const response = await fetch("https://unishop-fullstack.onrender.com/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -117,7 +117,7 @@ export const UserProvider = ({ children }) => {
 
   const login_with_google = async (email) => {
     try {
-      const response = await fetch("http://127.0.0.1:5000/auth/login_with_google", {
+      const response = await fetch("https://unishop-fullstack.onrender.com/auth/login_with_google", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
@@ -149,7 +149,7 @@ export const UserProvider = ({ children }) => {
   // Register function
   const register = async (username, email, password) => {
     try {
-      const response = await fetch("http://127.0.0.1:5000/auth/register", {
+      const response = await fetch("https://unishop-fullstack.onrender.com/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, email, password }),
@@ -180,7 +180,7 @@ export const UserProvider = ({ children }) => {
         throw new Error("No token found. Please log in again.");
       }
   
-      const response = await fetch(`http://127.0.0.1:5000/users/${user.id}`, {
+      const response = await fetch(`https://unishop-fullstack.onrender.com/users/${user.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -216,7 +216,7 @@ export const UserProvider = ({ children }) => {
       const formData = new FormData();
       formData.append("file", file);
   
-      const response = await fetch("http://127.0.0.1:5000/auth/upload", {
+      const response = await fetch("https://unishop-fullstack.onrender.com/auth/upload", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${safeStorageGet("token")}`,
