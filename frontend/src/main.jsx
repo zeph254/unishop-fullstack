@@ -9,22 +9,26 @@ import { CartProvider } from './context/CartContext';
 import { ProductProvider } from './context/ProductContext';
 import { OrderProvider } from "./context/OrderContext";
 import { WishlistProvider } from './context/WishlistContext';
+import { BrowserRouter } from "react-router-dom";
 
+const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID; // Move to env file
 
 createRoot(document.getElementById('root')).render(
-  <GoogleOAuthProvider clientId="587185143160-oc5gioqh3cr6nbntie6nv25tfg0ki2nt.apps.googleusercontent.com">
-  <StrictMode>
-    <UserProvider>
-    <ProductProvider>
-    <CartProvider>
-    <OrderProvider>
-    <WishlistProvider>
-      <App />
-      </WishlistProvider>
-      </OrderProvider>
-    </CartProvider>
-  </ProductProvider>
-    </UserProvider>
-  </StrictMode>
+  <GoogleOAuthProvider clientId={googleClientId}>
+    <StrictMode>
+      <BrowserRouter> {/* Wrap everything inside BrowserRouter */}
+        <UserProvider>
+          <ProductProvider>
+            <CartProvider>
+              <OrderProvider>
+                <WishlistProvider>
+                  <App />
+                </WishlistProvider>
+              </OrderProvider>
+            </CartProvider>
+          </ProductProvider>
+        </UserProvider>
+      </BrowserRouter>
+    </StrictMode>
   </GoogleOAuthProvider>
 );
