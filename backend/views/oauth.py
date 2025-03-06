@@ -9,14 +9,14 @@ oauth_bp = Blueprint('oauth_bp', __name__, url_prefix='/auth')
 
 # Google OAuth2 configuration
 
-GOOGLE_REDIRECT_URI = 'http://localhost:5000/auth/google/callback'
+GOOGLE_REDIRECT_URI = 'https://unishop-fullstack.onrender.com/auth/google/callback'
 GOOGLE_AUTHORIZATION_BASE_URL = "https://accounts.google.com/o/oauth2/v2/auth"
 GOOGLE_TOKEN_URL = "https://oauth2.googleapis.com/token"
 GOOGLE_USERINFO_URL = "https://www.googleapis.com/oauth2/v1/userinfo"
 
 # GitHub OAuth2 configuration
 
-GITHUB_REDIRECT_URI = 'http://localhost:5000/auth/github/callback'
+GITHUB_REDIRECT_URI = 'https://unishop-fullstack.onrender.com/auth/github/callback'
 GITHUB_AUTHORIZATION_BASE_URL = "https://github.com/login/oauth/authorize"
 GITHUB_TOKEN_URL = "https://github.com/login/oauth/access_token"
 GITHUB_USERINFO_URL = "https://api.github.com/user"

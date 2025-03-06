@@ -56,7 +56,6 @@ const ProductPage = () => {
         category: '',
         image_url: '',
       });
-      // Refresh the product list to ensure the updated product is displayed
       await fetchProducts();
     } catch (error) {
       console.error('Failed to update/add product:', error);

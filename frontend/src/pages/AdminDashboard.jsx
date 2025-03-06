@@ -223,6 +223,11 @@ const AdminDashboard = () => {
               Products
             </button>
           </li>
+          <li className="mb-4">
+            <button onClick={() => navigate('/live-chat')} className="w-full text-left hover:bg-blue-700 p-2 rounded">
+              Live Chart
+            </button>
+          </li>
           </li>
           <li className="mb-4">
             <button

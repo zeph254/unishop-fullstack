@@ -4,6 +4,11 @@ import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
 import { useUser } from '../context/UserContext';
 import axios from 'axios';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
+
+
 
 function Cart() {
   const {
@@ -266,18 +271,17 @@ function Cart() {
                           >
                             Add to Cart
                           </button>
-                          <button
-                            onClick={() => handleWishlistToggle(recItem)}
-                            className={`px-4 py-2 rounded-lg text-sm ${
-                              isInWishlist(recItem.id)
-                                ? 'bg-red-500 text-white hover:bg-red-600'
-                                : 'bg-gray-300 text-black hover:bg-gray-400'
-                            }`}
-                          >
-                            {isInWishlist(recItem.id)
-                              ? 'Remove from Wishlist'
-                              : 'Add to Wishlist'}
-                          </button>
+                                              <button
+                      onClick={() => handleWishlistToggle(recItem)}
+                      className="p-2 rounded hover:bg-gray-100 transition-colors"
+                    >
+                      {isInWishlist(recItem.id) ? (
+                        <FontAwesomeIcon icon={faHeart} className="h-6 w-6 text-red-500" />
+                      ) : (
+                        <FontAwesomeIcon icon={regularHeart} className="h-6 w-6 text-gray-500" />
+                      )}
+                    </button>
+
                         </div>
                       </div>
                     </div>

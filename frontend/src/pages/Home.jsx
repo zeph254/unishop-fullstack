@@ -6,6 +6,9 @@ import { useUser } from '../context/UserContext';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
 import { useProduct } from '../context/ProductContext';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faHeart as regularHeart } from '@fortawesome/free-regular-svg-icons';
+
 import {
   faTv,
   faMobileAlt,
@@ -16,7 +19,6 @@ import {
   faChevronUp,
   faLaptop,
   faStore,
-  faHeart,
   faHome,
   faGamepad,
   faBaby,
@@ -222,27 +224,32 @@ const ProductCard = ({ product, onAddToCart, onWishlistToggle, isInWishlist, isR
         <h3 className="text-lg font-semibold text-gray-800">{product.name}</h3>
         <p className="text-blue-600 font-bold mt-2">Ksh{product.price}</p>
         <div className="flex space-x-2 mt-4">
+          {/* Add to Cart Button */}
           <button
             onClick={onAddToCart}
             className="w-full bg-blue-700 text-white py-2 rounded-lg hover:bg-blue-800 transition-colors"
           >
             Add to Cart
           </button>
+
+          {/* Wishlist Toggle Button with Heart Icon */}
           <button
             onClick={onWishlistToggle}
             disabled={isRemovingFromWishlist}
-            className={`p-2 rounded ${
-              isInWishlist ? 'bg-red-500 text-white' : 'bg-gray-300 text-black'
-            }`}
+            className="p-2 rounded hover:bg-gray-100 transition-colors"
           >
-            {isInWishlist ? 'Remove from Wishlist' : 'Add to Wishlist'}
+{isInWishlist ? (
+  <FontAwesomeIcon icon={faHeart} className="h-6 w-6 text-red-500" />
+) : (
+  <FontAwesomeIcon icon={regularHeart} className="h-6 w-6 text-gray-500" />
+)}
+
           </button>
         </div>
       </div>
     </motion.div>
   );
 };
-
 // Home Component (updated)
 function HomeImproved() {
   const navigate = useNavigate();

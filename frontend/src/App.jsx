@@ -1,11 +1,13 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/Layout";
+import HelpCenter from "./pages/HelpCenter";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import NoPage from "./pages/NoPage";
 import Profile from "./pages/Profile";
 import SignIn from "./pages/SignIn";
+import LiveChart from "./pages/LiveChart";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import Account from "./pages/Account";
@@ -43,9 +45,11 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="login" element={<Login />} />
+          <Route path="help" element={<HelpCenter />} />
           <Route path="signin" element={<SignIn />} />
           <Route path="profile" element={<Profile />} />
           <Route path="checkout" element={<Checkout />} />
+          <Route path="live-chat" element={<LiveChart />} />
           <Route path="account" element={<Account />} />
           <Route path="orders" element={<Orders />} />
           <Route path="wishlist" element={<Wishlist />} />

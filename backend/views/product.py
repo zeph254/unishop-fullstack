@@ -40,38 +40,38 @@ def get_most_sold_products():
 @product_bp.route('/', methods=['POST'])
 @jwt_required()
 def create_product():
-    current_user_id = get_jwt_identity()
-    current_user = User.query.get(current_user_id)
+    try:
+        current_user_id = get_jwt_identity()
+        current_user = User.query.get(current_user_id)
 
-    # Only admins can create products
-    if current_user.role != 'admin':
-        return jsonify({"error": "Unauthorized access"}), 403
+        if not current_user or current_user.role != 'admin':
+            return jsonify({"error": "Unauthorized access"}), 403
 
-    data = request.get_json()
-    name = data.get('name')
-    description = data.get('description')
-    price = data.get('price')
-    stock = data.get('stock')
-    category = data.get('category')
-    image_url = data.get('image_url')
+        data = request.get_json()
+        print("Received Data:", data)  # Log request payload
 
-    if not name or not price or not category:
-        return jsonify({"error": "Name, price, and category are required"}), 400
+        required_fields = ["name", "price", "category"]
+        for field in required_fields:
+            if field not in data or not data[field]:
+                return jsonify({"error": f"Missing required field: {field}"}), 400
 
-    new_product = Product(
-        name=name,
-        description=description,
-        price=price,
-        stock=stock,
-        category=category,
-        image_url=image_url
-    )
+        new_product = Product(
+            name=data["name"],
+            description=data.get("description"),
+            price=float(data["price"]),
+            stock=int(data.get("stock", 0)),  # Ensure valid int
+            category=data["category"],
+            image_url=data.get("image_url")
+        )
 
-    db.session.add(new_product)
-    db.session.commit()
+        db.session.add(new_product)
+        db.session.commit()
+        return jsonify({"message": "Product created successfully", "product_id": new_product.id}), 201
 
-    return jsonify({"message": "Product created successfully", "product_id": new_product.id}), 201
-
+    except Exception as e:
+        db.session.rollback()
+        print("Product Creation Error:", str(e))  # Log error
+        return jsonify({"error": str(e)}), 500
 # Get all products (Public Access)
 @product_bp.route('/', methods=['GET'])
 def get_products():
@@ -110,33 +110,40 @@ def get_product(product_id):
 @product_bp.route('/<int:product_id>', methods=['PUT'])
 @jwt_required()
 def update_product(product_id):
-    current_user_id = get_jwt_identity()
-    current_user = User.query.get(current_user_id)
+    try:
+        current_user_id = get_jwt_identity()
+        current_user = User.query.get(current_user_id)
 
-    # Only admins can update products
-    if current_user.role != 'admin':
-        return jsonify({"error": "Unauthorized access"}), 403
+        if not current_user or current_user.role != 'admin':
+            return jsonify({"error": "Unauthorized access"}), 403
 
-    product = Product.query.get(product_id)
-    if not product:
-        return jsonify({"error": "Product not found"}), 404
+        product = Product.query.get(product_id)
+        if not product:
+            return jsonify({"error": "Product not found"}), 404
 
-    data = request.get_json()
-    if "name" in data:
-        product.name = data["name"]
-    if "description" in data:
-        product.description = data["description"]
-    if "price" in data:
-        product.price = data["price"]
-    if "stock" in data:
-        product.stock = data["stock"]
-    if "category" in data:
-        product.category = data["category"]
-    if "image_url" in data:
-        product.image_url = data["image_url"]
+        data = request.get_json()
+        print("Received Data:", data)  # Log request payload
 
-    db.session.commit()
-    return jsonify({"message": "Product updated successfully"}), 200
+        if "name" in data:
+            product.name = data["name"]
+        if "description" in data:
+            product.description = data["description"]
+        if "price" in data:
+            product.price = float(data["price"])  # Ensure price is a float
+        if "stock" in data:
+            product.stock = int(data["stock"])  # Ensure stock is an integer
+        if "category" in data:
+            product.category = data["category"]
+        if "image_url" in data:
+            product.image_url = data["image_url"]
+
+        db.session.commit()
+        return jsonify({"message": "Product updated successfully"}), 200
+
+    except Exception as e:
+        db.session.rollback()
+        print("Product Update Error:", str(e))  # Log error
+        return jsonify({"error": str(e)}), 500
 
 # Delete a product (Admin Only)
 @product_bp.route('/<int:product_id>', methods=['DELETE'])

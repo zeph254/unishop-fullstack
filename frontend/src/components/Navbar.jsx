@@ -72,11 +72,9 @@ export default function Navbar() {
                   <div className="absolute right-0 mt-2 w-56 bg-gray-800 text-white border border-gray-700 rounded-md shadow-lg opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-300 z-50">
                     <ul className="py-2">
                       <li>
-                        <Link to="/help-center" className="block px-4 py-2 hover:bg-gray-700">Help Center</Link>
+                        <Link to="/help" className="block px-4 py-2 hover:bg-gray-700">Help Center</Link>
                       </li>
-                      <li>
-                        <Link to="/livechat" className="block px-4 py-2 hover:bg-gray-700">Live Chat</Link>
-                      </li>
+
                     </ul>
                   </div>
                 </div>

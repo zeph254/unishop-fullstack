@@ -151,7 +151,7 @@ const Checkout = () => {
           ))}
           <div className="flex justify-between">
             <span>Delivery Fee:</span>
-            <span>${deliveryFee}</span>
+            <span>KES{deliveryFee}</span>
           </div>
           <div className="flex justify-between border-t pt-3">
             <span className="font-bold">Total:</span>

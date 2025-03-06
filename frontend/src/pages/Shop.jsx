@@ -1,8 +1,12 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { useProduct } from "../context/ProductContext";
 import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
 import { useNavigate } from "react-router-dom";
+import { HeartIcon } from "@heroicons/react/24/solid"; // Filled heart icon
+import { HeartIcon as HeartOutlineIcon } from "@heroicons/react/24/outline";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Shop = () => {
   const {
@@ -14,11 +18,15 @@ const Shop = () => {
     searchProducts,
   } = useProduct();
   const { addToCart } = useCart();
-  const { addToWishlist, removeFromWishlist, isInWishlist, wishlistItems } = useWishlist(); // Add wishlistItems
+  const { addToWishlist, removeFromWishlist, isInWishlist, wishlistItems } =
+    useWishlist();
   const navigate = useNavigate();
 
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
+
+  // Re-render component when wishlist changes
+  useEffect(() => {}, [wishlistItems]);
 
   // Handle category filter change
   const handleCategoryChange = (category) => {
@@ -37,11 +45,24 @@ const Shop = () => {
   const handleAddToCart = async (product) => {
     try {
       await addToCart(product);
-      alert(`${product.name} added to cart!`);
-    } 
-    catch (error) {
+      toast.success(`${product.name} added to cart!`, {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+    } catch (error) {
       console.error("Error adding to cart:", error);
-      alert("Failed to add product to cart. Please try again.");
+      toast.error("Failed to add product to cart. Please try again.", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
     }
   };
 
@@ -49,21 +70,50 @@ const Shop = () => {
   const handleWishlistToggle = async (product) => {
     try {
       if (isInWishlist(product.id)) {
-        // Find the wishlist item ID for the product
-        const wishlistItem = wishlistItems.find((item) => item.product_id === product.id);
+        const wishlistItem = wishlistItems.find(
+          (item) => item.product_id === product.id
+        );
         if (!wishlistItem) {
-          alert('Wishlist item not found.');
+          toast.error("Wishlist item not found.", {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+          });
           return;
         }
-        await removeFromWishlist(wishlistItem.id); // Pass the wishlist item ID
-        alert(`${product.name} removed from wishlist!`);
+        await removeFromWishlist(wishlistItem.id);
+        toast.success(`${product.name} removed from wishlist!`, {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
       } else {
         await addToWishlist(product);
-        alert(`${product.name} added to wishlist!`);
+        toast.success(`${product.name} added to wishlist!`, {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
       }
     } catch (error) {
       console.error("Error toggling wishlist:", error);
-      alert("Failed to update wishlist. Please try again.");
+      toast.error("Failed to update wishlist. Please try again.", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
     }
   };
 
@@ -145,20 +195,23 @@ const Shop = () => {
                   Add to Cart
                 </button>
                 <button
-                  className={`p-2 rounded ${
-                    isInWishlist(product.id)
-                      ? "bg-red-500 text-white"
-                      : "bg-gray-300 text-black"
-                  }`}
+                  className="p-2 rounded hover:bg-gray-100 transition-colors"
                   onClick={() => handleWishlistToggle(product)}
                 >
-                  {isInWishlist(product.id) ? "Remove from Wishlist" : "Add to Wishlist"}
+                  {isInWishlist(product.id) ? (
+                    <HeartIcon className="h-6 w-6 text-red-500" /> // Filled heart
+                  ) : (
+                    <HeartOutlineIcon className="h-6 w-6 text-gray-500" /> // Outline heart
+                  )}
                 </button>
               </div>
             </div>
           </div>
         ))}
       </div>
+
+      {/* Toast Container */}
+      <ToastContainer />
     </div>
   );
 };
