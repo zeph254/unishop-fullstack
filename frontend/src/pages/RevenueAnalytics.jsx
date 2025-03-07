@@ -14,7 +14,7 @@ const RevenueAnalytics = () => {
   const fetchRevenueAnalytics = async () => {
     try {
       const token = safeStorageGet('token');
-      const response = await fetch('https://unishop-fullstack.onrender.com/analytics/revenue', {
+      const response = await fetch('https://unishop-fullstack-1.onrender.com/analytics/revenue', {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await response.json();

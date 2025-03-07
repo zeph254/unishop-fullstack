@@ -29,7 +29,7 @@ export const CartProvider = ({ children }) => {
       }
 
       console.log('Fetching cart items...'); // Debug logging
-      const response = await axios.get('https://unishop-fullstack.onrender.com/cart', {
+      const response = await axios.get('https://unishop-fullstack-1.onrender.com/cart', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -59,7 +59,7 @@ export const CartProvider = ({ children }) => {
       }
 
       const response = await axios.post(
-        'https://unishop-fullstack.onrender.com/cart/add',
+        'https://unishop-fullstack-1.onrender.com/cart/add',
         { product_id: product.id, quantity },
         {
           headers: {
@@ -94,7 +94,7 @@ export const CartProvider = ({ children }) => {
       }
 
       console.log(`Removing product ${productId} from cart`); // Debug logging
-      await axios.delete(`https://unishop-fullstack.onrender.com/cart/remove/${productId}`, {
+      await axios.delete(`https://unishop-fullstack-1.onrender.com/cart/remove/${productId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -115,7 +115,7 @@ export const CartProvider = ({ children }) => {
       }
 
       await axios.put(
-        `https://unishop-fullstack.onrender.com/cart/update/${productId}`,
+        `https://unishop-fullstack-1.onrender.com/cart/update/${productId}`,
         { quantity },
         {
           headers: {
@@ -142,7 +142,7 @@ export const CartProvider = ({ children }) => {
         return;
       }
 
-      await axios.delete('https://unishop-fullstack.onrender.com/cart/clear', {
+      await axios.delete('https://unishop-fullstack-1.onrender.com/cart/clear', {
         headers: {
           Authorization: `Bearer ${token}`,
         },

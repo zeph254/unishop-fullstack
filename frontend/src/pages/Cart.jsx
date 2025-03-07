@@ -33,7 +33,7 @@ function Cart() {
   useEffect(() => {
     const fetchMostSoldProducts = async () => {
       try {
-        const response = await axios.get('https://unishop-fullstack.onrender.com/products/most-sold');
+        const response = await axios.get('https://unishop-fullstack-1.onrender.com/products/most-sold');
         setRecommendedItems(response.data);
       } catch (error) {
         console.error('Error fetching most sold products:', error);

@@ -15,7 +15,7 @@ export const OrderProvider = ({ children }) => {
   const fetchOrderHistory = async () => {
     setLoading(true);
     try {
-      const response = await axios.get("https://unishop-fullstack.onrender.com/order/history", {
+      const response = await axios.get("https://unishop-fullstack-1.onrender.com/order/history", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -46,7 +46,7 @@ export const OrderProvider = ({ children }) => {
     setLoading(true);
     try {
       const response = await axios.post(
-        "https://unishop-fullstack.onrender.com/order/create",
+        "https://unishop-fullstack-1.onrender.com/order/create",
         { cart_items: cartItems },
         {
           headers: {
@@ -74,7 +74,7 @@ export const OrderProvider = ({ children }) => {
     setLoading(true);
     try {
       const response = await axios.put(
-        `https://unishop-fullstack.onrender.com/order/update/${orderId}`,
+        `https://unishop-fullstack-1.onrender.com/order/update/${orderId}`,
         { status },
         {
           headers: {
@@ -102,7 +102,7 @@ export const OrderProvider = ({ children }) => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `https://unishop-fullstack.onrender.com/order/track/${orderId}`,
+        `https://unishop-fullstack-1.onrender.com/order/track/${orderId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -127,7 +127,7 @@ export const OrderProvider = ({ children }) => {
     setLoading(true);
     try {
       const response = await axios.delete(
-        `https://unishop-fullstack.onrender.com/order/delete/${orderId}`,
+        `https://unishop-fullstack-1.onrender.com/order/delete/${orderId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,

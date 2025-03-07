@@ -55,7 +55,7 @@ export const UserProvider = ({ children }) => {
     }
 
     try {
-      const response = await fetch("https://unishop-fullstack.onrender.com/users", {
+      const response = await fetch("https://unishop-fullstack-1.onrender.com/users", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -94,34 +94,40 @@ export const UserProvider = ({ children }) => {
   // Login function
   const login = async (email, password) => {
     try {
-      const response = await fetch("https://unishop-fullstack.onrender.com/auth/login", {
+      console.log("Sending login request..."); // Debugging log
+  
+      const response = await fetch("https://unishop-fullstack-1.onrender.com/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
         credentials: "include",  // This allows cookies to be sent with requests
       });
-      
-      const data = await response.json();
-      if (response.ok) {
-        setUser(data.user);
-        setIsAuthenticated(true);
-        safeStorageSet('user', JSON.stringify(data.user));
-        safeStorageSet('token', data.access_token);
-        console.log("Token stored after login:", data.access_token); // Debugging log
-        return data;
-      } else {
-        throw new Error(data.message || "Login failed");
+  
+      console.log("Response status:", response.status); // Debugging log
+  
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error("Login failed:", errorData.message); // Debugging log
+        throw new Error(errorData.message || "Login failed");
       }
+  
+      const data = await response.json();
+      console.log("Login successful:", data.user); // Debugging log
+      setUser(data.user);
+      setIsAuthenticated(true);
+      safeStorageSet('user', JSON.stringify(data.user));
+      safeStorageSet('token', data.access_token);
+      console.log("Token stored after login:", data.access_token); // Debugging log
+      return data;
     } catch (error) {
-      console.error("Login error:", error);
+      console.error("Login error:", error); // Debugging log
       throw error;
     }
   };
-
   // Login with Google function
   const login_with_google = async (email) => {
     try {
-      const response = await fetch("https://unishop-fullstack.onrender.com/auth/login_with_google", {
+      const response = await fetch("https://unishop-fullstack-1.onrender.com/auth/login_with_google", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
@@ -154,7 +160,7 @@ export const UserProvider = ({ children }) => {
   // Register function
   const register = async (username, email, password) => {
     try {
-      const response = await fetch("https://unishop-fullstack.onrender.com/auth/register", {
+      const response = await fetch("https://unishop-fullstack-1.onrender.com/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, email, password }),
@@ -186,7 +192,7 @@ export const UserProvider = ({ children }) => {
         throw new Error("No token found. Please log in again.");
       }
 
-      const response = await fetch(`https://unishop-fullstack.onrender.com/users/${user.id}`, {
+      const response = await fetch(`https://unishop-fullstack-1.onrender.com/users/${user.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -222,7 +228,7 @@ export const UserProvider = ({ children }) => {
       const formData = new FormData();
       formData.append("file", file);
 
-      const response = await fetch("https://unishop-fullstack.onrender.com/auth/upload", {
+      const response = await fetch("https://unishop-fullstack-1.onrender.com/auth/upload", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${safeStorageGet("token")}`,

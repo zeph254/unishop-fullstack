@@ -87,7 +87,7 @@ export default function ProfilePage() {
 
     if (window.confirm("Are you sure you want to delete your account?")) {
       try {
-        const response = await fetch(`https://unishop-fullstack.onrender.com/users/${user.id}`, {
+        const response = await fetch(`https://unishop-fullstack-1.onrender.com/users/${user.id}`, {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',
