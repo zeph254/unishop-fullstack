@@ -133,7 +133,7 @@ Deployment options: Render, Vercel
 ## 📩 Contact
 For any inquiries, reach out to:
 
-Owuor,Z.Ulare
+Owuor.Z.Ulare
             📧 Email: ularezephaniah@gmail.com - fullstack developer
             📌 GitHub:zeph254 
 
@@ -148,5 +148,5 @@ Samuel Gitau
 https://unishop-fullstack.onrender.com
 
 ## frontend deployed link
-https://flayer.vercel.app/
+(https://run-sigma.vercel.app/)
 
