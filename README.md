@@ -134,15 +134,15 @@ Deployment options: Render, Vercel
 For any inquiries, reach out to:
 
 Owuor,Z.Ulare
-            📧 Email: ularezephaniah@gmail.com
+            📧 Email: ularezephaniah@gmail.com - fullstack developer
             📌 GitHub:zeph254 
 
 Bradley Ochieng
-            📧 Email: email@example.com
-            📌 GitHub: username
+            📧 Email: bradleyochieng@gmail.com - backend developer
+            📌 GitHub: bradelvis
 
 Samuel Gitau
-            📧 Email: email@example.com
-            📌 GitHub: username            
+            📧 Email: andygitau444@gmail.com - frontend developer
+            📌 GitHub: Andysam254          
 
 
