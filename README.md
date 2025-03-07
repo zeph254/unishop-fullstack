@@ -145,7 +145,7 @@ Samuel Gitau
             📧 Email: andygitau444@gmail.com - frontend developer
             📌 GitHub: Andysam254          
 ## backend deployed link
-https://unishop-fullstack.onrender.com
+(https://unishop-fullstack-1.onrender.com)
 
 ## frontend deployed link
 (https://run-sigma.vercel.app/)
