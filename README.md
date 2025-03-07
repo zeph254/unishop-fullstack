@@ -138,7 +138,7 @@ Owuor,Z.Ulare
             📌 GitHub:zeph254 
 
 Bradley Ochieng
-            📧 Email: bradleyochieng@gmail.com - backend developer
+            📧 Email: bradleyelvis@gmail.com - backend developer
             📌 GitHub: bradelvis
 
 Samuel Gitau
