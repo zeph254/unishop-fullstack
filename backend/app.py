@@ -25,9 +25,6 @@ from views import user_bp, admin_bp, product_bp, cart_bp, order_bp, analytics_bp
 def create_app():
     app = Flask(__name__)
 
-    # Enable CORS for all domains (change this to a specific domain in production)
-    configure_cors(app)
-
     # Configuration settings
     app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://shopdb_475k_user:uYSh9kbllnuSOnx9vV3Kd8TdfBPwUnBT@dpg-cv4asbl2ng1s73b720i0-a.oregon-postgres.render.com/shopdb_475k"
     app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY', 'wouhsdjlahljxnlsqehouefhouuel')
@@ -54,23 +51,30 @@ def create_app():
     jwt.init_app(app)
     Migrate(app, db)
 
+    # Configure CORS
+    configure_cors(app)
+
     # Register Blueprints
     register_blueprints(app)
-
-    # Explicitly handle OPTIONS preflight requests
-    @app.before_request
-    def handle_options():
-        if request.method == "OPTIONS":
-            return _build_cors_preflight_response()
-
-    @app.after_request
-    def after_request(response):
-        return _corsify_response(response)
 
     return app
 
 def configure_cors(app):
-    CORS(app, supports_credentials=True)
+    CORS(
+        app,
+        origins=["https://run-sigma.vercel.app"],  # Allow only this origin
+        supports_credentials=True,
+        methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+        allow_headers=["Content-Type", "Authorization"],
+    )
+
+    @app.after_request
+    def after_request(response):
+        # Ensure only one Access-Control-Allow-Origin header is set
+        if "Access-Control-Allow-Origin" in response.headers:
+            response.headers.pop("Access-Control-Allow-Origin")
+        response.headers["Access-Control-Allow-Origin"] = "https://run-sigma.vercel.app"
+        return response
 
 def register_blueprints(app):
     app.register_blueprint(user_bp)
@@ -83,24 +87,6 @@ def register_blueprints(app):
     app.register_blueprint(auth_bp)
     app.register_blueprint(oauth_bp)
     app.register_blueprint(wishlist_bp)
-
-# Helper function to handle CORS preflight responses
-def _build_cors_preflight_response():
-    response = jsonify({"message": "CORS preflight successful"})
-    response.status_code = 200
-    response.headers.add("Access-Control-Allow-Origin", "http://localhost:5173")
-    response.headers.add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
-    response.headers.add("Access-Control-Allow-Headers", "Content-Type, Authorization")
-    response.headers.add("Access-Control-Allow-Credentials", "true")
-    return response
-
-# Helper function to add CORS headers to all responses
-def _corsify_response(response):
-    response.headers.add("Access-Control-Allow-Origin", "http://localhost:5173")
-    response.headers.add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
-    response.headers.add("Access-Control-Allow-Headers", "Content-Type, Authorization")
-    response.headers.add("Access-Control-Allow-Credentials", "true")
-    return response
 
 # Run the application
 if __name__ == "__main__":

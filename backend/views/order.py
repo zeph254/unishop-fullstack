@@ -7,22 +7,7 @@ from flask_cors import CORS
 order_bp = Blueprint("order_bp", __name__)
 
 # Enable CORS for the order_bp blueprint
-CORS(
-    order_bp,
-    origins="http://localhost:5173",  # Allow requests from this origin
-    supports_credentials=True,  # Allow credentials (e.g., cookies, authorization headers)
-    methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],  # Allow these HTTP methods
-    allow_headers=["Content-Type", "Authorization"],  # Allow these headers
-)
 
-# Add a global after_request handler to include CORS headers
-@order_bp.after_request
-def after_request(response):
-    response.headers.add("Access-Control-Allow-Origin", "http://localhost:5173")
-    response.headers.add("Access-Control-Allow-Credentials", "true")
-    response.headers.add("Access-Control-Allow-Headers", "Content-Type, Authorization")
-    response.headers.add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
-    return response
 
 @order_bp.route("/create", methods=["POST"])
 @jwt_required()

@@ -122,7 +122,7 @@ def forgot_password():
     token = serializer.dumps(email, salt="password-reset")
 
     # Create the reset link pointing to the frontend
-    reset_link = f"http://localhost:5173/auth/reset-password/{token}"
+    reset_link = f"https://run-sigma.vercel.app/auth/reset-password/{token}"
 
     # Send the email with the reset link
     msg = Message("Password Reset Request", sender="noreply@example.com", recipients=[email])

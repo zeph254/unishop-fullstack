@@ -48,12 +48,12 @@ export const UserProvider = ({ children }) => {
   const fetchUser = async () => {
     const token = safeStorageGet('token');
     console.log("Token being sent:", token); // Debugging log
-  
+
     if (!token) {
       setLoading(false);
       return;
     }
-  
+
     try {
       const response = await fetch("https://unishop-fullstack.onrender.com/users", {
         method: "GET",
@@ -61,15 +61,16 @@ export const UserProvider = ({ children }) => {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
+        credentials: "include",  // Include credentials (cookies) in the request
       });
-  
+
       console.log("Response status:", response.status); // Debugging log
-  
+
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.error || "Failed to fetch user data");
       }
-  
+
       const data = await response.json();
       console.log("Fetched User:", data.user); // Debugging log
       setUser(data.user);
@@ -79,11 +80,11 @@ export const UserProvider = ({ children }) => {
       console.error("Fetch user error:", error);
       safeStorageRemove('token');
       safeStorageRemove('user');
+      setIsAuthenticated(false);
     } finally {
       setLoading(false);
     }
   };
-  
 
   // Initialize user and authentication state from storage
   useEffect(() => {
@@ -97,7 +98,9 @@ export const UserProvider = ({ children }) => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
+        credentials: "include",  // This allows cookies to be sent with requests
       });
+      
       const data = await response.json();
       if (response.ok) {
         setUser(data.user);
@@ -115,12 +118,14 @@ export const UserProvider = ({ children }) => {
     }
   };
 
+  // Login with Google function
   const login_with_google = async (email) => {
     try {
       const response = await fetch("https://unishop-fullstack.onrender.com/auth/login_with_google", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
+        credentials: "include",  // Include credentials (cookies) in the request
       });
       const data = await response.json();
       if (response.ok) {
@@ -130,10 +135,10 @@ export const UserProvider = ({ children }) => {
         safeStorageSet('token', data.access_token);
         return data;
       } else {
-        throw new Error(data.message || "Login failed");
+        throw new Error(data.message || "Login with Google failed");
       }
     } catch (error) {
-      console.error("Login error:", error);
+      console.error("Login with Google error:", error);
       throw error;
     }
   };
@@ -153,6 +158,7 @@ export const UserProvider = ({ children }) => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, email, password }),
+        credentials: "include",  // Include credentials (cookies) in the request
       });
       const data = await response.json();
       if (response.ok) {
@@ -175,11 +181,11 @@ export const UserProvider = ({ children }) => {
     try {
       const token = safeStorageGet('token');
       console.log("Token being sent:", token); // Debugging log
-  
+
       if (!token) {
         throw new Error("No token found. Please log in again.");
       }
-  
+
       const response = await fetch(`https://unishop-fullstack.onrender.com/users/${user.id}`, {
         method: 'PUT',
         headers: {
@@ -187,22 +193,22 @@ export const UserProvider = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(updatedProfile),
+        credentials: "include",  // Include credentials (cookies) in the request
       });
-  
+
       const data = await response.json();
       console.log("API Response:", data); // Debugging log
-  
+
       if (!response.ok) {
         throw new Error(data.error || "Profile update failed");
       }
-  
+
       return data;
     } catch (error) {
       console.error("Profile update error:", error);
       throw error;
     }
   };
-  
 
   // Upload profile picture
   const uploadProfilePicture = async (file) => {
@@ -210,23 +216,24 @@ export const UserProvider = ({ children }) => {
       if (!file) {
         throw new Error("No file selected for upload");
       }
-  
+
       console.log("Uploading file:", file); // Debugging log
-  
+
       const formData = new FormData();
       formData.append("file", file);
-  
+
       const response = await fetch("https://unishop-fullstack.onrender.com/auth/upload", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${safeStorageGet("token")}`,
         },
         body: formData,
+        credentials: "include",  // Include credentials (cookies) in the request
       });
-  
+
       const data = await response.json();
       console.log("Upload response:", data); // Debugging log
-  
+
       if (response.ok) {
         const updatedUser = { ...user, profile_image: data.url };
         setUser(updatedUser);
@@ -240,7 +247,7 @@ export const UserProvider = ({ children }) => {
       throw error;
     }
   };
-  
+
   // Context value
   const value = {
     user,
@@ -252,7 +259,7 @@ export const UserProvider = ({ children }) => {
     register,
     updateProfile,
     uploadProfilePicture,
-    fetchUser,  // <== Add this line
+    fetchUser,
     safeStorageGet,
   };
 
