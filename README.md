@@ -144,5 +144,9 @@ Bradley Ochieng
 Samuel Gitau
             📧 Email: andygitau444@gmail.com - frontend developer
             📌 GitHub: Andysam254          
+## backend deployed link
+https://unishop-fullstack.onrender.com
 
+## frontend deployed link
+https://flayer.vercel.app/
 
