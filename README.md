@@ -150,3 +150,6 @@ Samuel Gitau
 ## frontend deployed link
 (https://run-sigma.vercel.app/)
 
+## slides
+https://docs.google.com/presentation/d/1xcNSwG2TN4wu-O8t08JvYhMbmnh_xb2FpfJ7usFBJzw/edit#slide=id.g332a68acd7
+
